@@ -7,7 +7,7 @@
 - [x] Integration test harness (WebApplicationFactory)
 - [x] CI: format check, build, test, coverage upload
 - [x] Dockerfile (multi-stage, non-root)
-- [ ] CI green on GitHub
+- [x] CI green on GitHub
 
 ## v0.2.0 — Core tax engine
 
