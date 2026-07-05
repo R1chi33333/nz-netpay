@@ -11,13 +11,13 @@
 
 ## v0.2.0 — Core tax engine
 
-- [ ] Rate tables for 2025-26 as data records, each value cited to its IRD/ACC source URL
-- [ ] PAYE income tax: progressive bracket calculation
-- [ ] ACC earners' levy with earnings cap
-- [ ] KiwiSaver employee contribution (3/4/6/8/10 percent)
-- [ ] Student loan repayment (12 percent over annual threshold)
+- [x] Rate tables for 2025-26 and 2026-27 as data records, each value cited to its IRD/ACC source URL
+- [x] PAYE income tax: progressive bracket calculation
+- [x] ACC earners' levy with earnings cap
+- [x] KiwiSaver employee contribution (3.5/4/6/8/10 percent from April 2026, plus 3 percent temporary rate)
+- [x] Student loan repayment (12 percent over annual threshold)
 - [ ] Take-home breakdown per period: annual, monthly, fortnightly, weekly, hourly
-- [ ] Unit tests against IRD worked examples, coverage at least 90 percent on the engine
+- [x] Unit tests against IRD worked examples, coverage at least 90 percent on the engine
 
 ## v0.3.0 — API surface
 
