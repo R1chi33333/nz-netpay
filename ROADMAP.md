@@ -31,6 +31,6 @@
 ## v1.0.0 — Playground + deploy
 
 - [x] Playground page: salary input to instant breakdown table (calls the API)
-- [ ] Render deployment (free tier), live URL in README
+- [x] Render deployment (free tier), live URL in README
 - [x] README: badges, architecture diagram, rate source table
-- [ ] Portfolio sync: card on r1chi33333.github.io + repo topics
+- [x] Portfolio sync: card on r1chi33333.github.io + repo topics

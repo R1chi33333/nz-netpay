@@ -6,7 +6,9 @@
 
 ASP.NET Core 8 API that turns a salary into a full deduction breakdown — PAYE income tax, ACC earners' levy, KiwiSaver and student loan — using only official IRD and ACC published rates, each cited to its source.
 
-Live demo: Azure deployment in progress — run locally with one command below.
+[Live demo](https://nz-netpay.onrender.com) · [API docs](https://nz-netpay.onrender.com/docs) · [Report a bug](https://github.com/R1chi33333/nz-netpay/issues)
+
+> Hosted on Render's free tier, so the first request after a period of inactivity takes 30-60 seconds to wake the container. Subsequent requests are instant.
 
 ## Why this exists
 
@@ -62,10 +64,10 @@ Or with Docker:
 docker build -t nz-netpay . && docker run -p 8080:8080 nz-netpay
 ```
 
-Example:
+Example (against the live API):
 
 ```bash
-curl "localhost:8080/v1/take-home?salary=70000&kiwiSaverRate=0.035&studentLoan=true"
+curl "https://nz-netpay.onrender.com/v1/take-home?salary=70000&kiwiSaverRate=0.035&studentLoan=true"
 ```
 
 ## Testing
