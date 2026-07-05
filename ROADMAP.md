@@ -21,12 +21,12 @@
 
 ## v0.3.0 — API surface
 
-- [ ] GET /v1/take-home: salary + options to full deduction breakdown
-- [ ] GET /v1/gst: add or remove 15 percent GST
-- [ ] GET /v1/rates: the rate tables with source citations
-- [ ] Problem Details error responses, input validation
-- [ ] OpenAPI document + Swagger UI at /docs
-- [ ] Rate limiting middleware
+- [x] GET /v1/take-home: salary + options to full deduction breakdown
+- [x] GET /v1/gst: add or remove 15 percent GST
+- [x] GET /v1/rates: the rate tables with source citations
+- [x] Problem Details error responses, input validation
+- [x] OpenAPI document + Swagger UI at /docs
+- [x] Rate limiting middleware
 
 ## v1.0.0 — Playground + deploy
 
