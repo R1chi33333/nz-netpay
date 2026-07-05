@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: nz-netpay
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    autoDeploy: true
