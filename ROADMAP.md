@@ -16,7 +16,7 @@
 - [x] ACC earners' levy with earnings cap
 - [x] KiwiSaver employee contribution (3.5/4/6/8/10 percent from April 2026, plus 3 percent temporary rate)
 - [x] Student loan repayment (12 percent over annual threshold)
-- [ ] Take-home breakdown per period: annual, monthly, fortnightly, weekly, hourly
+- [x] Take-home breakdown per period: annual, monthly, fortnightly, weekly, hourly
 - [x] Unit tests against IRD worked examples, coverage at least 90 percent on the engine
 
 ## v0.3.0 — API surface
