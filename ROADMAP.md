@@ -30,7 +30,7 @@
 
 ## v1.0.0 — Playground + deploy
 
-- [ ] Playground page: salary input to instant breakdown table (calls the API)
+- [x] Playground page: salary input to instant breakdown table (calls the API)
 - [ ] Azure deployment, live URL in README
-- [ ] README: badges, architecture diagram, rate source table
+- [x] README: badges, architecture diagram, rate source table
 - [ ] Portfolio sync: card on r1chi33333.github.io + repo topics

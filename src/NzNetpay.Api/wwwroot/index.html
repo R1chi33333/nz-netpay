@@ -3,37 +3,243 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>nz-netpay — NZ take-home pay API</title>
-<meta name="description" content="NZ take-home pay API: PAYE, ACC levy, KiwiSaver and student loan deductions from official IRD and ACC rates." />
+<title>nz-netpay — NZ take-home pay calculator</title>
+<meta name="description" content="New Zealand take-home pay: PAYE, ACC levy, KiwiSaver and student loan deductions from official IRD and ACC rates. Open API." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#0a0a0b; --bg-2:#111113; --ink:#fafafa; --ink-2:#a1a1aa;
+    --bg:#0a0a0b; --bg-2:#111113; --bg-3:#18181b; --ink:#fafafa; --ink-2:#a1a1aa;
     --border:#27272a; --accent:#0ea5e9;
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ color-scheme:dark; }
   body{
     background:var(--bg); color:var(--ink);
     font-family:Inter, system-ui, -apple-system, sans-serif;
-    min-height:100vh; display:grid; place-items:center;
+    font-size:15px; line-height:1.6; min-height:100vh;
   }
-  main{ text-align:center; padding:24px; }
   .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; }
-  .badge{
-    display:inline-block; font-size:12px; letter-spacing:.08em;
-    color:var(--accent); border:1px solid var(--border); border-radius:6px;
-    padding:4px 10px; margin-bottom:16px;
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+
+  header{ border-bottom:1px solid var(--border); }
+  header .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; }
+  .brand{ font-weight:600; font-size:15px; }
+  .brand span{ color:var(--accent); }
+  nav a{ color:var(--ink-2); text-decoration:none; font-size:13.5px; margin-left:20px; }
+  nav a:hover{ color:var(--ink); }
+
+  .hero{ padding:56px 0 8px; }
+  h1{ font-size:clamp(1.5rem,3.4vw,2.1rem); font-weight:600; letter-spacing:-.02em; }
+  .sub{ color:var(--ink-2); margin-top:8px; max-width:640px; font-size:14.5px; }
+  .sub a{ color:var(--accent); text-decoration:none; }
+
+  .panel{
+    display:grid; grid-template-columns:320px 1fr; gap:20px;
+    margin:32px 0 24px;
   }
-  h1{ font-size:clamp(1.6rem,4vw,2.4rem); font-weight:600; }
-  p{ color:var(--ink-2); margin-top:12px; font-size:.95rem; }
-  a{ color:var(--accent); text-decoration:none; }
+  .card{
+    background:var(--bg-2); border:1px solid var(--border); border-radius:8px;
+    padding:20px;
+  }
+  label{ display:block; font-size:12.5px; color:var(--ink-2); margin:14px 0 5px; }
+  label:first-child{ margin-top:0; }
+  input[type=number], select{
+    width:100%; background:var(--bg-3); color:var(--ink);
+    border:1px solid var(--border); border-radius:6px; padding:9px 11px;
+    font:inherit; font-size:14px;
+  }
+  input:focus, select:focus{ outline:1px solid var(--accent); border-color:var(--accent); }
+  .check{ display:flex; align-items:center; gap:9px; margin-top:16px; font-size:14px; }
+  .check input{ accent-color:var(--accent); width:15px; height:15px; }
+
+  table{ width:100%; border-collapse:collapse; font-size:14px; }
+  th, td{ text-align:right; padding:9px 10px; border-bottom:1px solid var(--border); }
+  th:first-child, td:first-child{ text-align:left; }
+  th{ color:var(--ink-2); font-weight:500; font-size:12px; letter-spacing:.05em; }
+  td{ font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13.5px; }
+  td:first-child{ font-family:Inter, system-ui, sans-serif; }
+  tr.total td{ border-bottom:none; color:var(--accent); font-weight:500; }
+  .muted{ color:var(--ink-2); }
+
+  .meta{ margin-top:14px; font-size:12.5px; color:var(--ink-2); }
+  .meta a{ color:var(--accent); text-decoration:none; }
+
+  .apiline{
+    margin-top:20px; background:var(--bg-2); border:1px solid var(--border);
+    border-radius:8px; padding:14px 16px; font-size:12.5px; color:var(--ink-2);
+    overflow-x:auto; white-space:nowrap;
+  }
+  .apiline b{ color:var(--ink); font-weight:500; }
+
+  footer{ border-top:1px solid var(--border); margin-top:48px; }
+  footer .wrap{ padding:20px 24px; font-size:12.5px; color:var(--ink-2); }
+
+  @media (max-width:760px){
+    .panel{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <div class="badge mono">UNDER CONSTRUCTION</div>
-  <h1>nz-netpay</h1>
-  <p>New Zealand take-home pay API — PAYE, ACC, KiwiSaver, student loan.</p>
-  <p class="mono"><a href="/healthz">/healthz</a></p>
+
+<header>
+  <div class="wrap">
+    <div class="brand">nz-<span>netpay</span></div>
+    <nav>
+      <a href="/docs">API docs</a>
+      <a href="https://github.com/R1chi33333/nz-netpay">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>What does a NZ salary actually pay?</h1>
+    <p class="sub">
+      PAYE, ACC earners' levy, KiwiSaver and student loan, calculated from
+      official IRD and ACC published rates — every figure cited at
+      <a href="/v1/rates">/v1/rates</a>. General information, not financial advice.
+    </p>
+  </section>
+
+  <section class="panel">
+    <form class="card" id="form">
+      <label for="salary">Annual salary (NZD)</label>
+      <input type="number" id="salary" value="70000" min="0" max="10000000" step="1000" />
+
+      <label for="taxYear">Tax year</label>
+      <select id="taxYear">
+        <option value="2026-27" selected>2026-27 (current)</option>
+        <option value="2025-26">2025-26</option>
+      </select>
+
+      <label for="kiwisaver">KiwiSaver employee rate</label>
+      <select id="kiwisaver">
+        <option value="">Not enrolled</option>
+        <option value="0.03">3% (temporary reduction)</option>
+        <option value="0.035" selected>3.5% (default)</option>
+        <option value="0.04">4%</option>
+        <option value="0.06">6%</option>
+        <option value="0.08">8%</option>
+        <option value="0.10">10%</option>
+      </select>
+
+      <div class="check">
+        <input type="checkbox" id="studentloan" />
+        <label for="studentloan" style="margin:0; font-size:14px; color:var(--ink);">Student loan</label>
+      </div>
+    </form>
+
+    <div class="card">
+      <table id="result" aria-live="polite">
+        <thead>
+          <tr><th>Line</th><th>Annual</th><th>Monthly</th><th>Weekly</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="meta" id="meta"></p>
+    </div>
+  </section>
+
+  <div class="apiline mono" id="apiline"></div>
 </main>
+
+<footer>
+  <div class="wrap">
+    Rates: IRD and ACC, linked per figure at /v1/rates.
+    Hourly assumes a 40-hour week. Built by
+    <a href="https://r1chi33333.github.io" style="color:var(--accent); text-decoration:none;">Richie Jin</a>.
+  </div>
+</footer>
+
+<script>
+(() => {
+  const form = document.getElementById('form');
+  const tbody = document.querySelector('#result tbody');
+  const meta = document.getElementById('meta');
+  const apiline = document.getElementById('apiline');
+  const nzd = new Intl.NumberFormat('en-NZ', { style: 'currency', currency: 'NZD' });
+
+  let timer;
+  const kiwiSaverOptions = {
+    '2026-27': [['', 'Not enrolled'], ['0.03', '3% (temporary reduction)'], ['0.035', '3.5% (default)'], ['0.04', '4%'], ['0.06', '6%'], ['0.08', '8%'], ['0.10', '10%']],
+    '2025-26': [['', 'Not enrolled'], ['0.03', '3% (default)'], ['0.04', '4%'], ['0.06', '6%'], ['0.08', '8%'], ['0.10', '10%']],
+  };
+
+  function syncKiwiSaverOptions() {
+    const year = document.getElementById('taxYear').value;
+    const select = document.getElementById('kiwisaver');
+    const current = select.value;
+    select.innerHTML = '';
+    for (const [value, label] of kiwiSaverOptions[year]) {
+      const option = new Option(label, value);
+      select.add(option);
+    }
+    select.value = [...select.options].some(o => o.value === current) ? current : (year === '2026-27' ? '0.035' : '0.03');
+  }
+
+  function row(label, amounts, cls) {
+    const tr = document.createElement('tr');
+    if (cls) tr.className = cls;
+    tr.innerHTML = `<td>${label}</td>` + ['annual', 'monthly', 'weekly']
+      .map(p => `<td>${nzd.format(amounts[p])}</td>`).join('');
+    return tr;
+  }
+
+  async function calculate() {
+    const salary = Number(document.getElementById('salary').value || 0);
+    const taxYear = document.getElementById('taxYear').value;
+    const ks = document.getElementById('kiwisaver').value;
+    const sl = document.getElementById('studentloan').checked;
+
+    const params = new URLSearchParams({ salary: String(salary), taxYear });
+    if (ks) params.set('kiwiSaverRate', ks);
+    if (sl) params.set('studentLoan', 'true');
+    const url = '/v1/take-home?' + params.toString();
+    apiline.innerHTML = '<b>GET</b> ' + url;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      const problem = await response.json().catch(() => null);
+      tbody.innerHTML = '';
+      meta.textContent = problem?.detail || 'Request failed.';
+      return;
+    }
+    const data = await response.json();
+
+    const annualOnly = v => ({ annual: v, monthly: v / 12, weekly: v / 52 });
+    tbody.innerHTML = '';
+    tbody.append(
+      row('Gross salary', annualOnly(data.grossSalary)),
+      row('PAYE income tax', annualOnly(-data.deductions.paye)),
+      row('ACC earners’ levy', annualOnly(-data.deductions.accLevy)),
+    );
+    if (data.deductions.kiwiSaverEmployee > 0) {
+      tbody.append(row('KiwiSaver (employee)', annualOnly(-data.deductions.kiwiSaverEmployee)));
+    }
+    if (data.deductions.studentLoan > 0) {
+      tbody.append(row('Student loan', annualOnly(-data.deductions.studentLoan)));
+    }
+    tbody.append(row('Take-home pay', {
+      annual: data.takeHome.annual, monthly: data.takeHome.monthly, weekly: data.takeHome.weekly,
+    }, 'total'));
+
+    meta.innerHTML = `Tax year ${data.taxYear} · effective tax rate `
+      + `${(data.effectiveTaxRate * 100).toFixed(1)}% (PAYE + ACC) · `
+      + `hourly ${nzd.format(data.takeHome.hourly)} at 40 h/week · `
+      + `<a href="/v1/rates">rate sources</a>`;
+  }
+
+  form.addEventListener('input', (event) => {
+    if (event.target.id === 'taxYear') syncKiwiSaverOptions();
+    clearTimeout(timer);
+    timer = setTimeout(calculate, 200);
+  });
+  form.addEventListener('submit', (event) => event.preventDefault());
+  calculate();
+})();
+</script>
+
 </body>
 </html>
