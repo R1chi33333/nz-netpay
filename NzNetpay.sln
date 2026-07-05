@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1AF29F3D-D484-4DB1-BD30-503B141CA79F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NzNetpay.Api", "src\NzNetpay.Api\NzNetpay.Api.csproj", "{9F353E18-F7A2-4EA1-A528-1865D2B099C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2220BA42-E3FF-4845-956D-493A12D72D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NzNetpay.Tests", "tests\NzNetpay.Tests\NzNetpay.Tests.csproj", "{1BF91F00-1E48-4685-A9D0-CE4E9B67932F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F353E18-F7A2-4EA1-A528-1865D2B099C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F353E18-F7A2-4EA1-A528-1865D2B099C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F353E18-F7A2-4EA1-A528-1865D2B099C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F353E18-F7A2-4EA1-A528-1865D2B099C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF91F00-1E48-4685-A9D0-CE4E9B67932F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF91F00-1E48-4685-A9D0-CE4E9B67932F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF91F00-1E48-4685-A9D0-CE4E9B67932F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF91F00-1E48-4685-A9D0-CE4E9B67932F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F353E18-F7A2-4EA1-A528-1865D2B099C2} = {1AF29F3D-D484-4DB1-BD30-503B141CA79F}
+		{1BF91F00-1E48-4685-A9D0-CE4E9B67932F} = {2220BA42-E3FF-4845-956D-493A12D72D28}
+	EndGlobalSection
+EndGlobal
